@@ -1,0 +1,207 @@
+<!--
+  Copyright 2016 The Cartographer Authors
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+<robot name="LHD">
+  <material name="orange">
+    <color rgba="1.0 0.5 0.2 1" />
+  </material>
+  <material name="gray">
+    <color rgba="0.2 0.2 0.2 1" />
+  </material>
+
+  <link name="imu_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="orange" />
+    </visual>
+  </link>
+
+  <link name="laser_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder length="0.0" radius="0.0" />
+      </geometry>
+      <material name="gray" />
+    </visual>
+  </link>
+
+
+  <link name="base_link" />
+
+
+<!-- imu -->
+  <joint name="imu_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu_link" />
+    <origin xyz="-0.16 0.33 0.86" rpy="0. 0. 0." />
+  </joint>
+
+<!-- lidar -->
+  <joint name="lidar_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="laser_link" />
+    <origin xyz="-0.12 0.33 1.08" rpy="0. 0. 0." />
+  </joint>
+
+
+<!-- 铰接传感器 -->
+ <link name="jiaojie_sensor_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder length="0.2" radius="0.2" />
+      </geometry>
+      <material name="black" />
+    </visual>
+  </link>
+
+  <joint name="jiaojie_sensor_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="jiaojie_sensor_link" />
+    <origin xyz="-0 0 1.8" rpy="0. 0. 0." />
+  </joint>
+
+<!-- 交接点 -->
+ <link name="jiaojie_point_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder length="0.5" radius="0.08" />
+      </geometry>
+      <material name="orange" />
+    </visual>
+  </link>
+
+  <joint name="jiaojie_point_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="jiaojie_point_link" />
+    <origin xyz="-0 0 1.9" rpy="0. 0. 0." />
+  </joint>
+
+
+<!-- stl_front-0.72 -->
+  <link
+    name="qiancheshen_link">
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.14159" />
+      <geometry>
+        <mesh
+          filename="package://cartographer_ros/meshes/qiancheshen.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.98 0.78 0 1" />
+      </material>
+    </visual>
+  </link>
+
+<joint name="qiancheshen_link_joint" type="fixed">
+    <parent link="jiaojie_point_link" />
+    <child link="qiancheshen_link" />
+    <origin xyz="0 0 0" rpy="0. 0. 0." />
+  </joint>
+
+<!-- stl_back_0.72 -->
+
+  <link
+    name="houcheshen_link">
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.14159" />
+      <geometry>
+        <mesh
+          filename="package://cartographer_ros/meshes/houcheshen.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.98 0.78 0 1" />
+      </material>
+    </visual>
+  </link>
+
+<joint name="houcheshen_link_joint" type="fixed">
+    <parent link="jiaojie_point_link" />
+    <child link="houcheshen_link" />
+    <origin xyz="0 0 0" rpy="0. 0. 0." />
+  </joint>
+
+
+<!-- front_wheels -->
+  <link
+    name="qianlun_link">
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.14159" />
+      <geometry>
+        <mesh
+          filename="package://cartographer_ros/meshes/qianlun.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+<joint name="qianlun_link_joint" type="fixed">
+    <parent link="jiaojie_point_link" />
+    <child link="qianlun_link" />
+    <origin xyz="0 0 0" rpy="0. 0. 0." />
+  </joint>
+
+<!-- back_wheels -->
+
+
+  <link
+    name="houlun_link">
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.14159" />
+      <geometry>
+        <mesh
+          filename="package://cartographer_ros/meshes/houlun.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba=" 0 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+<joint name="houlun_link_joint" type="fixed">
+    <parent link="jiaojie_point_link" />
+    <child link="houlun_link" />
+    <origin xyz="0 0 0" rpy="0. 0. 0." />
+  </joint>
+
+
+
+</robot>
+
