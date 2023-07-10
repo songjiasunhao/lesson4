@@ -186,21 +186,6 @@ target_link_libraries(${PROJECT_NAME}_hector_mapping_node
   # ${Boost_LIBRARIES}
 )
 
-## Hector SLAM
-add_executable(${PROJECT_NAME}_hector_slam_node
-  src/hector_mapping/hector_slam.cc
-
-)
-
-add_dependencies(${PROJECT_NAME}_hector_slam_node
-${catkin_EXPORTED_TARGETS}
-)
-
-target_link_libraries(${PROJECT_NAME}_hector_slam_node
-  ${catkin_LIBRARIES}
-  ${Boost_LIBRARIES}
-  ${PCL_LIBRARIES}
-)
 
 #############
 ## Install ##

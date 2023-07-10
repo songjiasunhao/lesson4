@@ -16,8 +16,8 @@
 
 #ifndef LESSON4_HECTOR_SLAM_H_
 #define LESSON4_HECTOR_SLAM_H_
-#include "ros/ros.h"
 
+#include "ros/ros.h"
 
 #include "tf/transform_listener.h"
 #include "tf/transform_broadcaster.h"
@@ -37,13 +37,6 @@
 #include <boost/thread.hpp>
 #include <chrono>
 
-#include <pcl_conversions/pcl_conversions.h> 
-#include <pcl/conversions.h>   
-#include <pcl_ros/transforms.h>
-#include <sensor_msgs/point_cloud_conversion.h>
-#include <pcl/filters/passthrough.h>
-
-
 class MapPublisherContainer
 {
 public:
@@ -58,7 +51,7 @@ class HectorMappingRos
 public:
     HectorMappingRos();
     ~HectorMappingRos();
-    void scanCallback(const sensor_msgs::PointCloud2::ConstPtr &pointcloud);
+    void scanCallback(const sensor_msgs::LaserScan &scan);
     void publishMapLoop(double p_map_pub_period_);
 
 private:
@@ -66,11 +59,11 @@ private:
     void setMapInfo(nav_msgs::GetMap::Response &map_, const hectorslam::GridMap &gridMap);
     void publishMap(MapPublisherContainer &map_, const hectorslam::GridMap &gridMap, ros::Time timestamp, MapLockerInterface *mapMutex = 0);
     bool rosPointCloudToDataContainer(const sensor_msgs::PointCloud &pointCloud, const tf::StampedTransform &laserTransform, hectorslam::DataContainer &dataContainer, float scaleToMap);
-    
+
 protected:
     ros::NodeHandle node_handle_;  // ros中的句柄
     ros::NodeHandle private_node_; // ros中的私有句柄
-    ros::Subscriber point_cloud_subscriber_;
+    ros::Subscriber laser_scan_subscriber_;
     ros::Publisher odometryPublisher_;
 
     std::vector<MapPublisherContainer> mapPubContainer;

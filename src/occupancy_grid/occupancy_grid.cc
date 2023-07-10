@@ -38,12 +38,12 @@ OccupancyGrid::OccupancyGrid()
     map_.info.resolution = 0.05;
 
     // 地图图片像素的大小, width为地图的宽度是多少个像素
-    map_.info.width = 30;
-    map_.info.height = 30;
+  //  map_.info.width = 30;
+    //map_.info.height = 30;
 
     // 如果要表示地图图片为多少米的话,就需要用实际长度除以分辨率,得到像素值
-    // map_.info.width = 100 / map_.info.resolution;
-    // map_.info.height = 100 / map_.info.resolution;
+     map_.info.width = 5 / map_.info.resolution;
+     map_.info.height = 5 / map_.info.resolution;
 
     // 地图左下角的点对应的物理坐标
     map_.info.origin.position.x = 0.0;

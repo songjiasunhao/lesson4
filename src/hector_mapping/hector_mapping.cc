@@ -15,6 +15,7 @@
  */
 
 #include "lesson4/hector_mapping/hector_mapping.h"
+#include <math.h>
 
 namespace hector_mapping
 {
@@ -44,17 +45,17 @@ HectorMapping::~HectorMapping()
 void HectorMapping::InitParams()
 {
     if (!private_node_.getParam("xmin", xmin_))
-        xmin_ = -40.0;
+        xmin_ = -20.0;
     if (!private_node_.getParam("ymin", ymin_))
-        ymin_ = -40.0;
+        ymin_ = -20.0;
     if (!private_node_.getParam("xmax", xmax_))
-        xmax_ = 40.0;
+        xmax_ = 20.0;
     if (!private_node_.getParam("ymax", ymax_))
-        ymax_ = 40.0;
-    resolution_ = 0.1;
+        ymax_ = 20.0;
+    resolution_ = 0.05;
 
-    map_size_[0] = (xmax_ - xmin_) / resolution_;
-    map_size_[1] = (ymax_ - ymin_) / resolution_;
+    map_size_[0] = 400;
+    map_size_[1] = 400;
 
     // hector定义的offset做地图左上角的物理坐标
     offset_[0] = xmin_;
@@ -138,8 +139,8 @@ void HectorMapping::ROSLaserScanToDataContainer(const sensor_msgs::LaserScan &sc
                                                 hectorslam::DataContainer &dataContainer,
                                                 float resolution)
 {
-    size_t size = scan.ranges.size()*10;
-
+    size_t size = scan.ranges.size();
+ //   size_t size =(scan.angle_max-scan.angle_min)/scan.angle_increment;
     float angle = scan.angle_min;
 
     dataContainer.clear();
@@ -150,29 +151,32 @@ void HectorMapping::ROSLaserScanToDataContainer(const sensor_msgs::LaserScan &sc
 
     for (size_t i = 0; i < size; ++i)//在两点之间加十个点
     {
-
         float dist=0;
-        if(i%10 !=0)
-        {
-            dist = (scan.ranges[i/10]+scan.ranges[(i+10)/10])/2;
-        }else
-        {
-            dist = scan.ranges[i/10];
+        
+        if(isinf(scan.ranges[i]))
+        { 
+            dist =0;
+            std::cout<<"无限大";
         }
-
+        else
+        {
+            dist =scan.ranges[i];
+        }
 
         if ((dist > scan.range_min) && (dist < maxRangeForContainer))
         {
-            // dist *= resolution; ///! 将实际物理尺度转换到地图尺度）
-            dataContainer.add(Eigen::Vector2f(cos(angle) * dist, sin(angle) * dist));
+             //dist *= resolution; ///! 将实际物理尺度转换到地图尺度）
+            dataContainer.add(Eigen::Vector2f(cos(angle) * dist*0.5, sin(angle) * dist*0.5));
             // std::cout << "x: " << cos(angle) * dist << " y: " << sin(angle) * dist << std::endl;
         }
         else//限制未击中的距离
         {
-            dataContainer.add(Eigen::Vector2f(cos(angle)*maxRangeForContainer,sin(angle)*maxRangeForContainer));
+            
+            dataContainer.add(Eigen::Vector2f(cos(angle)*maxRangeForContainer/20,sin(angle)*maxRangeForContainer/20));
         }
-        angle += scan.angle_increment/10;
+        angle += scan.angle_increment;
     }
+    
 }
 
 // 将雷达数据写成hector的地图
@@ -189,6 +193,8 @@ void HectorMapping::PublishMap()
 {
     int sizeX = hector_map_->getSizeX();
     int sizeY = hector_map_->getSizeY();
+    std::cout<<"sizeX: "<<sizeX<<" sizeY: "<<sizeY<<std::endl;
+
     int size = sizeX * sizeY;
 
     std::vector<int8_t> &data = map_.data;

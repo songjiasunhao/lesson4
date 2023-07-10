@@ -27,7 +27,7 @@ GMapping::GMapping() : private_node_("~")
     ROS_INFO_STREAM("\033[1;32m----> Make Gmapping Map by no move started.\033[0m");
 
     laser_scan_subscriber_ = node_handle_.subscribe(
-        "laser_scan", 1, &GMapping::ScanCallback, this);
+        "scan", 1, &GMapping::ScanCallback, this);
 
     map_publisher_ = node_handle_.advertise<nav_msgs::OccupancyGrid>("map", 1, true);
     map_publisher_metadata_ = node_handle_.advertise<nav_msgs::MapMetaData>("map_metadata", 1, true);

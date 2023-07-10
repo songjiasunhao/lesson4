@@ -178,8 +178,8 @@ public:
         currMarkOccIndex = currUpdateIndex + 2;
 
         //Get pose in map coordinates from pose in world coordinates
-        // Eigen::Vector3f mapPose(this->getMapCoordsPose(robotPoseWorld));
-        Eigen::Vector3f mapPose(400, 400, 0);
+        //Eigen::Vector3f mapPose(this->getMapCoordsPose(robotPoseWorld));
+        Eigen::Vector3f mapPose(200, 200, 0);
         //Get a 2D homogenous transform that can be left-multiplied to a robot coordinates vector to get world coordinates of that vector
         Eigen::Affine2f poseTransform((Eigen::Translation2f(
                                            mapPose[0], mapPose[1]) *
@@ -199,8 +199,8 @@ public:
         {
             //Get integer map coordinates of current beam endpoint
             Eigen::Vector2i scanEndMapi;
-            scanEndMapi[0] = scanBeginMapi[0] + (int)round(dataContainer.getVecEntry(i)[0] / 0.1);
-            scanEndMapi[1] = scanBeginMapi[1] + (int)round(dataContainer.getVecEntry(i)[1] / 0.1);
+            scanEndMapi[0] = scanBeginMapi[0] + (int)round(dataContainer.getVecEntry(i)[0] / 0.05);
+            scanEndMapi[1] = scanBeginMapi[1] + (int)round(dataContainer.getVecEntry(i)[1] / 0.05);
 
             //Update map using a bresenham variant for drawing a line from beam start to beam endpoint in map coordinates
             if (scanBeginMapi != scanEndMapi)

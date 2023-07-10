@@ -106,7 +106,7 @@
         rpy="0 0 3.14159" />
       <geometry>
         <mesh
-          filename="package://cartographer_ros/meshes/qiancheshen.stl" />
+          filename="package://lesson4/meshes/qiancheshen.stl" />
       </geometry>
       <material
         name="">
@@ -132,7 +132,7 @@
         rpy="0 0 3.14159" />
       <geometry>
         <mesh
-          filename="package://cartographer_ros/meshes/houcheshen.stl" />
+          filename="package://lesson4/meshes/houcheshen.stl" />
       </geometry>
       <material
         name="">
@@ -158,7 +158,7 @@
         rpy="0 0 3.14159" />
       <geometry>
         <mesh
-          filename="package://cartographer_ros/meshes/qianlun.stl" />
+          filename="package://lesson4/meshes/qianlun.stl" />
       </geometry>
       <material
         name="">
@@ -185,7 +185,7 @@
         rpy="0 0 3.14159" />
       <geometry>
         <mesh
-          filename="package://cartographer_ros/meshes/houlun.stl" />
+          filename="package://lesson4/meshes/houlun.stl" />
       </geometry>
       <material
         name="">

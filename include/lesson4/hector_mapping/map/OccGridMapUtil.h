@@ -190,7 +190,7 @@ public:
             intensities[3] = getUnfilteredGridPoint(index);
             cacheMethod.cacheData(index, intensities[3]);
         }
-        //////std::cout<<"intensities"<<intensities<<"\n";
+
         float dx1 = intensities[0] - intensities[1]; // 求得(M(P00) - M(P10))的值
         float dx2 = intensities[2] - intensities[3]; // 求得(M(P01) - M(P11))的值
 
