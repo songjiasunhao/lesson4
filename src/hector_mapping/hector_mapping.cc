@@ -139,7 +139,7 @@ void HectorMapping::ROSLaserScanToDataContainer(const sensor_msgs::LaserScan &sc
                                                 hectorslam::DataContainer &dataContainer,
                                                 float resolution)
 {
-    size_t size = scan.ranges.size();
+    size_t size = scan.ranges.size()*10;
  //   size_t size =(scan.angle_max-scan.angle_min)/scan.angle_increment;
     float angle = scan.angle_min;
 
@@ -153,10 +153,28 @@ void HectorMapping::ROSLaserScanToDataContainer(const sensor_msgs::LaserScan &sc
     {
         float dist=0;
         
-        if(isinf(scan.ranges[i]))
-        { 
-            dist =0;
-            std::cout<<"无限大";
+        if(i%10!=0)
+        {
+            float dist1 =0;
+            float dist2 =0;
+               if(isinf(scan.ranges[i/10]))
+            { 
+                dist1 =0;
+            }
+            else{
+                dist1 =scan.ranges[i/10];
+            }
+
+            if(isinf(scan.ranges[(i+10)/10]))
+            {
+                dist2 =0;
+            }
+            else
+            {
+                dist2 =scan.ranges[(i+10)/10];
+            }
+
+            dist = (dist1+dist2)/2;
         }
         else
         {
@@ -174,7 +192,7 @@ void HectorMapping::ROSLaserScanToDataContainer(const sensor_msgs::LaserScan &sc
             
             dataContainer.add(Eigen::Vector2f(cos(angle)*maxRangeForContainer/20,sin(angle)*maxRangeForContainer/20));
         }
-        angle += scan.angle_increment;
+        angle += scan.angle_increment/10;
     }
     
 }

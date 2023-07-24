@@ -179,7 +179,7 @@ public:
 
         //Get pose in map coordinates from pose in world coordinates
         //Eigen::Vector3f mapPose(this->getMapCoordsPose(robotPoseWorld));
-        Eigen::Vector3f mapPose(200, 200, 0);
+       Eigen::Vector3f mapPose(200, 200, 0);
         //Get a 2D homogenous transform that can be left-multiplied to a robot coordinates vector to get world coordinates of that vector
         Eigen::Affine2f poseTransform((Eigen::Translation2f(
                                            mapPose[0], mapPose[1]) *
