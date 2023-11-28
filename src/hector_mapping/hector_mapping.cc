@@ -51,7 +51,7 @@ void HectorMapping::InitParams()
         xmax_ = 20.0;
     if (!private_node_.getParam("ymax", ymax_))
         ymax_ = 20.0;
-    resolution_ = 0.1;
+    resolution_ = 0.2;
 
     map_size_[0] = (xmax_ - xmin_) / resolution_;
     map_size_[1] = (ymax_ - ymin_) / resolution_;
@@ -63,7 +63,7 @@ void HectorMapping::InitParams()
     /***************** 对map_进行初始化 *****************/
 
     // 地图的分辨率为0.05m,代表一个格子的距离是0.05m
-    map_.info.resolution = 0.1;
+    map_.info.resolution = 0.2;
 
     // 地图图片像素的大小, width为地图的宽度是多少个像素
     map_.info.width = map_size_[0];
@@ -164,13 +164,13 @@ void HectorMapping::ROSLaserScanToDataContainer(const sensor_msgs::LaserScan &sc
         if ((dist > scan.range_min) && (dist < maxRangeForContainer))
         {
             // dist *= resolution; ///! 将实际物理尺度转换到地图尺度）
-            dataContainer.add(Eigen::Vector2f(cos(angle) * dist, sin(angle) * dist));
+            dataContainer.add(Eigen::Vector2f(cos(angle) * dist*0.5, sin(angle) * dist*0.5));
             // std::cout << "x: " << cos(angle) * dist << " y: " << sin(angle) * dist << std::endl;
         }
-        else//限制未击中的距离
-        {
-            dataContainer.add(Eigen::Vector2f(cos(angle)*maxRangeForContainer/10,sin(angle)*maxRangeForContainer/10));
-        }
+        //else//限制未击中的距离
+        //{
+            //dataContainer.add(Eigen::Vector2f(cos(angle)*maxRangeForContainer/20,sin(angle)*maxRangeForContainer/20));
+        //}
         angle += scan.angle_increment/10;
     }
 }

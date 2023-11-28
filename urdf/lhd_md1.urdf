@@ -11,7 +11,7 @@
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
+  limitations under the License.ro
 -->
 
 
@@ -111,7 +111,7 @@
         rpy="0 0 3.14159" />
       <geometry>
         <mesh
-          filename="package://cartographer_ros/meshes/qiancheshen.stl" />
+          filename="package://lesson4/meshes/qiancheshen.stl" />
       </geometry>
       <material
         name="">
@@ -137,7 +137,7 @@
         rpy="0 0 3.14159" />
       <geometry>
         <mesh
-          filename="package://cartographer_ros/meshes/qianlun.stl" />
+          filename="package://lesson4/meshes/qianlun.stl" />
       </geometry>
       <material
         name="">
@@ -184,7 +184,7 @@
         rpy="0 0 3.14159" />
       <geometry>
         <mesh
-          filename="package://cartographer_ros/meshes/houcheshen.stl" />
+          filename="package://lesson4/meshes/houcheshen.stl" />
       </geometry>
       <material
         name="">
@@ -212,7 +212,7 @@
         rpy="0 0 3.14159" />
       <geometry>
         <mesh
-          filename="package://cartographer_ros/meshes/houlun.stl" />
+          filename="package://lesson4/meshes/houlun.stl" />
       </geometry>
       <material
         name="">

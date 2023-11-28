@@ -1,12 +1,21 @@
-
-
 <launch>
 
     <!-- bag的地址与名称 -->
     <!--arg name="bag_filename" default="/home/sunhao/bagfiles/lesson1.bag"/-->
+ <node pkg="tf" type="static_transform_publisher" name="lesson434" 
+args="0 0 0 0 0 0 1 velodyne_01 base_link 100" />
 
-    <!-- 使用bag的时间戳 -->
-    <param name="use_sim_time" value="true" />
+   <!-- 使用bag的时间戳,必须使用false，否则无法显示 -->
+ <param name="use_sim_time" value="false" />
+
+    <param name="robot_description"
+    textfile="$(find lesson4)/urdf/lhd_md1.urdf" /> 
+
+    <param name = "use_gui" value ="false"/>
+
+   <node name="joint_state_publisher" pkg="joint_state_publisher"  type="joint_state_publisher"  />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
     <!-- 启动节点 -->
     <node name="lesson4_hector_mapping_node"
@@ -15,7 +24,5 @@
     <!-- launch rviz -->
     <node name="rviz" pkg="rviz" type="rviz" required="true"
         args="-d $(find lesson4)/config/hector_mapping.rviz" />
-
-
 
 </launch>
