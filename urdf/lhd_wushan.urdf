@@ -33,7 +33,7 @@
     </visual>
   </link>
 
-  <link name="velodyne_01">
+  <link name="laser_link">
     <visual>
       <origin xyz="0.0 0.0 0.0" />
       <geometry>
@@ -51,14 +51,14 @@
   <joint name="imu_link_joint" type="fixed">
     <parent link="base_link" />
     <child link="imu_link" />
-    <origin xyz="0.06 -0.56 0.673" rpy="0. 0. 0." />
+    <origin xyz="-0.16 0.33 0.86" rpy="0. 0. 0." />
   </joint>
 
 <!-- lidar -->
   <joint name="lidar_link_joint" type="fixed">
     <parent link="base_link" />
-    <child link="velodyne_01" />
-    <origin xyz="0.06 -0.56 0.673" rpy="0. 0. 1.570796" />
+    <child link="laser_link" />
+    <origin xyz="-0.12 0.33 1.08" rpy="0. 0. 0." />
   </joint>
 
 <!--jiaojie_point -->
@@ -75,7 +75,7 @@
   <joint name="jiaojie_point_link_joint" type="fixed">
     <parent link="base_link" />
     <child link="jiaojie_point_link" />
-    <origin xyz="-0 0 0" rpy="0. 0. 0." />
+    <origin xyz="-0 0 1.9" rpy="0. 0. 0." />
   </joint>
 
 
